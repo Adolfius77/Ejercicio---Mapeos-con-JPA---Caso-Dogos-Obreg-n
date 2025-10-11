@@ -5,6 +5,7 @@
 package Entidades;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -24,8 +25,7 @@ import java.math.BigDecimal;
 public class PedidoHotDog implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @EmbeddedId
     private PedidoHotDogId id;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -14,7 +14,7 @@ import jakarta.persistence.Persistence;
  */
 public class main {
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DogosPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("dogosPU");
         EntityManager em = emf.createEntityManager();
     }
  

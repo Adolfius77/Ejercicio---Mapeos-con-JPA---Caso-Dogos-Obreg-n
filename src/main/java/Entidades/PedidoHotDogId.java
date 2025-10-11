@@ -5,6 +5,7 @@
 package Entidades;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,44 +17,44 @@ import java.util.Objects;
  *
  * @author USER
  */
-@Entity
+@Embeddable
 public class PedidoHotDogId implements Serializable {
 
     @Column (name = "pedido_id")
-    private Long pedidoID;
+    private Long pedidoId;
     
     @Column(name = "hotDog_id")
-    private Long hotDogID;
+    private Long hotDogId;
 
     public PedidoHotDogId() {
     }
 
-    public PedidoHotDogId(Long pedidoID, Long hotDogID) {
-        this.pedidoID = pedidoID;
-        this.hotDogID = hotDogID;
+    public PedidoHotDogId(Long pedidoId, Long hotDogId) {
+        this.pedidoId = pedidoId;
+        this.hotDogId = hotDogId;
     }
 
-    public Long getPedidoID() {
-        return pedidoID;
+    public Long getPedidoId() {
+        return pedidoId;
     }
 
-    public void setPedidoID(Long pedidoID) {
-        this.pedidoID = pedidoID;
+    public void setPedidoId(Long pedidoId) {
+        this.pedidoId = pedidoId;
     }
 
-    public Long getHotDogID() {
-        return hotDogID;
+    public Long getHotDogId() {
+        return hotDogId;
     }
 
-    public void setHotDogID(Long hotDogID) {
-        this.hotDogID = hotDogID;
+    public void setHotDogId(Long hotDogId) {
+        this.hotDogId = hotDogId;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + Objects.hashCode(this.pedidoID);
-        hash = 67 * hash + Objects.hashCode(this.hotDogID);
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.pedidoId);
+        hash = 71 * hash + Objects.hashCode(this.hotDogId);
         return hash;
     }
 
@@ -69,11 +70,12 @@ public class PedidoHotDogId implements Serializable {
             return false;
         }
         final PedidoHotDogId other = (PedidoHotDogId) obj;
-        if (!Objects.equals(this.pedidoID, other.pedidoID)) {
+        if (!Objects.equals(this.pedidoId, other.pedidoId)) {
             return false;
         }
-        return Objects.equals(this.hotDogID, other.hotDogID);
+        return Objects.equals(this.hotDogId, other.hotDogId);
     }
+
     
     
    

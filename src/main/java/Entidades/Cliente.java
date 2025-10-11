@@ -46,12 +46,12 @@ public class Cliente implements Serializable {
     private Integer edad;
 
     @ElementCollection
-    @CollectionTable(name = "cliente_telefono", joinColumns = @JoinColumn(name = "num_cliente"))
-    @Column(name = "telefonos")
+    @CollectionTable(name = "cliente_telefonos", joinColumns = @JoinColumn(name = "num_cliente")) // <-- Tabla para teléfonos
+    @Column(name = "telefono")
     private List<String> telefonos;
 
     @ElementCollection
-    @CollectionTable(name = "cliente_telefonos", joinColumns = @JoinColumn(name = "num_cliente"))
+    @CollectionTable(name = "cliente_preferencias", joinColumns = @JoinColumn(name = "num_cliente")) // <-- CORRECCIÓN: Tabla diferente para preferencias
     @Column(name = "preferencia")
     private List<String> preferencias;
 
