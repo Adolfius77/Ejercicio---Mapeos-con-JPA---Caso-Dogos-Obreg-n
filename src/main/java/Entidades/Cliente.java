@@ -10,11 +10,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
 import java.io.Serializable;
@@ -46,30 +48,36 @@ public class Cliente implements Serializable {
     private Integer edad;
 
     @ElementCollection
-    @CollectionTable(name = "cliente_telefonos", joinColumns = @JoinColumn(name = "num_cliente")) // <-- Tabla para teléfonos
+    @CollectionTable(name = "cliente_telefonos", joinColumns = @JoinColumn(name = "num_cliente"))
     @Column(name = "telefono")
     private List<String> telefonos;
 
     @ElementCollection
-    @CollectionTable(name = "cliente_preferencias", joinColumns = @JoinColumn(name = "num_cliente")) // <-- CORRECCIÓN: Tabla diferente para preferencias
+    @CollectionTable(name = "cliente_preferencias", joinColumns = @JoinColumn(name = "num_cliente")) 
     @Column(name = "preferencia")
     private List<String> preferencias;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Pedido> pedidos;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cliente_recomienda_id", nullable = true) 
+    private Cliente clienteRecomienda;
+
+    @OneToMany(mappedBy = "clienteRecomienda")
+    private Set<Cliente> recomendados;
+
     public Cliente() {
     }
 
-    public Cliente(Long num_cliente, NombreCompleto nombreCompleto, LocalDate fch_nac, Integer edad, List<String> telefonos, List<String> preferencias, Set<Pedido> pedidos) {
+    public Cliente(Long num_cliente, NombreCompleto nombreCompleto, LocalDate fch_nac, List<String> telefonos, List<String> preferencias) {
         this.num_cliente = num_cliente;
         this.nombreCompleto = nombreCompleto;
         this.fch_nac = fch_nac;
-        this.edad = edad;
         this.telefonos = telefonos;
         this.preferencias = preferencias;
-        this.pedidos = pedidos;
     }
+    
 
     public Long getNum_cliente() {
         return num_cliente;
@@ -128,6 +136,22 @@ public class Cliente implements Serializable {
 
     public void setPedidos(Set<Pedido> pedidos) {
         this.pedidos = pedidos;
+    }
+
+    public Cliente getClienteRecomienda() {
+        return clienteRecomienda;
+    }
+
+    public void setClienteRecomienda(Cliente clienteRecomienda) {
+        this.clienteRecomienda = clienteRecomienda;
+    }
+
+    public Set<Cliente> getRecomendados() {
+        return recomendados;
+    }
+
+    public void setRecomendados(Set<Cliente> recomendados) {
+        this.recomendados = recomendados;
     }
 
 }
